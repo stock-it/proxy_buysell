@@ -8,7 +8,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/stocks/:stockId', express.static(path.join(__dirname, 'public')));
 
 const axios5000 = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://127.0.0.1:5000',
 });
 
 // const axios3002 = axios.create({
@@ -24,7 +24,8 @@ const axios5000 = axios.create({
 // });
 
 app.use('/api/stocks/:stockId', (req, res) => {
-  axios3001.get(`/api/stocks/${req.params.stockId}`)
+  const parameter = (req.params.stockId) ? req.params.stockId : 'AITHK'
+  axios5000.get(`/api/stocks/${parameter}`)
     .then(response => res.send(response.data))
     .catch(err => res.send(err));
 })
@@ -41,11 +42,11 @@ app.use('/api/stocks/:stockId', (req, res) => {
 //     .catch(err => res.send(err));
 // })
 
-// app.use('/api/accounts/:account_number', (req, res) => {
-//   axios3002.get(`/api/accounts/${req.params.account_number}`)
-//     .then(response => res.send(response.data))
-//     .catch(err => res.send(err));
-// })
+app.use('/api/accounts/:account_number', (req, res) => {
+  axios5000.get(`/api/accounts/${req.params.account_number}`)
+    .then(response => res.send(response.data))
+    .catch(err => res.send(err));
+})
 
 // app.use('/api/quotes/:symbol', (req, res) => {
 //   axios3003.get(`/api/quotes/${req.params.symbol}`)
