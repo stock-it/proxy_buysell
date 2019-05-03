@@ -8,8 +8,8 @@ const port = process.env.PORT || 3000;
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/stocks/:stockId', express.static(path.join(__dirname, 'public')));
 
-const axios5000 = axios.create({
-  baseURL: 'http://127.0.0.1:5000',
+const axiosAWS = axios.create({
+  baseURL: 'https://s3.amazonaws.com/sdc-service-deployment/bundle.js',
 });
 
 // const axios3002 = axios.create({
@@ -26,7 +26,7 @@ const axios5000 = axios.create({
 
 app.use('/:stockId', (req, res) => {
   const parameter = (req.params.stockId) ? req.params.stockId : 'AITHK'
-  axios5000.get(`/api/stocks/${parameter}`)
+  axiosAWS.get(`/api/stocks/${parameter}`)
     .then(response => res.send(response.data))
     .catch(err => res.send(err));
 })
