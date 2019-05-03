@@ -24,7 +24,7 @@ const axios5000 = axios.create({
 //   baseURL: 'http://localhost:4000',
 // });
 
-app.use('/api/stocks/:stockId', (req, res) => {
+app.use('/:stockId', (req, res) => {
   const parameter = (req.params.stockId) ? req.params.stockId : 'AITHK'
   axios5000.get(`/api/stocks/${parameter}`)
     .then(response => res.send(response.data))
