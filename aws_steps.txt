@@ -1,2 +1,18 @@
-Connect to EC2 Instance
-- ssh -i sdc.pem ec2-user@ec2-18-204-17-47.compute-1.amazonaws.com
+Connect to EC2 Instance - proxy
+- ssh -i proxy.pem ec2-user@ec2-184-73-127-80.compute-1.amazonaws.com
+
+
+
+
+Installing Node with NVM: 
+- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+- . ~/.nvm/nvm.sh
+- 
+
+install git 
+sudo yum install git
+
+clone git repo 
+git clone https://github.com/<username>/<repository-name>.git <folder-name>
+
+git clone https://github.com/stock-it/proxy_buysell.git
