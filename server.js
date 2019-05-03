@@ -9,7 +9,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/stocks/:stockId', express.static(path.join(__dirname, 'public')));
 
 const axiosAWS = axios.create({
-  baseURL: 'https://s3.amazonaws.com/sdc-service-deployment/bundle.js',
+  baseURL: 'ec2-3-95-157-200.compute-1.amazonaws.com',
 });
 
 // const axios3002 = axios.create({
@@ -25,11 +25,32 @@ const axiosAWS = axios.create({
 // });
 
 app.use('/:stockId', (req, res) => {
-  const parameter = (req.params.stockId) ? req.params.stockId : 'AITHK'
-  axiosAWS.get(`/api/stocks/${parameter}`)
-    .then(response => res.send(response.data))
-    .catch(err => res.send(err));
-})
+  const stockId = Math.ceil(Math.random() * 99);
+  axiosAWS.get(`/api/stocks/${stockId}`)
+  .then(res => {
+    const {
+      id,
+      ask_price,
+      ask_size,
+      bid_price,
+      bid_size,
+      last_extended_hours_trade_price,
+      last_trade_price,
+      symbol,
+      quantity,
+    } = response.data;
+    this.setState({
+      ask_price,
+      ask_size,
+      bid_price,
+      bid_size,
+      last_extended_hours_trade_price,
+      last_trade_price,
+      symbol,
+      quantity,
+    });
+  })
+});
 
 // app.use('/api/history/:ticker', (req, res) => {
 //   axios3001.get(`/api/history/${req.params.ticker}`)
